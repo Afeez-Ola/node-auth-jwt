@@ -1,3 +1,4 @@
+// jshint esversion:6
 const express = require('express');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -22,7 +23,7 @@ app.post('/api/posts', verifyToken, (req, res) => {
                 authData
             });
         }
-    })
+    });
 
 });
 
@@ -32,7 +33,7 @@ app.post('/api/login', (req, res) => {
         username: 'Bolaji',
         email: 'afeezbolajiola@gmail.com'
     }
-    jwt.sign({ user: user }, { expiresIn: '1h' }, 'secret', (err, token) => {
+    jwt.sign({ user: user }, { expiresIn: '30s' }, 'secret', (err, token) => {
         res.json({
             token: token
         });
@@ -43,9 +44,9 @@ function verifyToken(req, res, next) {
     const bearerHeader = req.headers['authorization'];
 
     if (typeof bearerHeader !== 'undefined') {
-        const bearer = bearerHeader.split(' ')
+        const bearer = bearerHeader.split(' ');
         const bearerToken = bearer[1]
-        req.token = bearerToken
+        req.token = bearerToken;
 
         next();
     } else {
