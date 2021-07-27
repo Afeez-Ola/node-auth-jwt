@@ -30,10 +30,11 @@ app.post('/api/posts', verifyToken, (req, res) => {
 app.post('/api/login', (req, res) => {
     const user = {
         id: 1,
-        username: 'Bolaji',
-        email: 'afeezbolajiola@gmail.com'
+        username: process.env.USER_NAME,
+        email: process.env.EMAIL
     }
-    jwt.sign({ user: user }, { expiresIn: '30s' }, 'secret', (err, token) => {
+    console.log(user.username)
+    jwt.sign({ user: user }, 'secret', (err, token) => {
         res.json({
             token: token
         });
@@ -56,6 +57,6 @@ function verifyToken(req, res, next) {
 
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server running on PORT: ${PORT} 🔥`));
