@@ -24,11 +24,11 @@ app.post('/api/posts', verifyToken, (req, res) => {
     });
 });
 
-api.post('/api/login', (req, res) => {
+app.post('/api/login', (req, res) => {
     const user = {
         id: Math.round(Math.random() * 10 + 1),
-        userName: process.env.USER_NAME,
-        email: process.env.EMAIL
+        userName: 'mobolaji',
+        email: 'afeez@gmail.com'
     };
 
     jwt.sign({ user: user }, 'secret', (err, token) => {
@@ -41,7 +41,7 @@ api.post('/api/login', (req, res) => {
 });
 
 function verifyToken(req, res, next) {
-    const bearerHeader = req.header.authorization;
+    const bearerHeader = req.headers.authorization;
     if (bearerHeader !== 'undefined') {
         const bearer = bearerHeader.split(' ');
         const bearerToken = bearer[1];
