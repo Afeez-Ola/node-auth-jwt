@@ -43,8 +43,8 @@ app.post('/api/login', (req, res) => {
 function verifyToken(req, res, next) {
     const bearerHeader = req.headers.authorization;
     if (bearerHeader !== 'undefined') {
-        const bearer = bearerHeader.split(' ');
-        const bearerToken = bearer[1];
+        const bearer = bearerHeader.split(' '),
+            bearerToken = bearer[1];
         req.token = bearerToken;
 
         next();
@@ -53,8 +53,6 @@ function verifyToken(req, res, next) {
     }
 }
 
-
-// const PORT = parseInt(process.env.POR);
 const PORT = 3000;
 
 console.log(PORT);
